@@ -1,36 +1,39 @@
 using Adiscount.Entities;
-using Microsoft.AspNetCore.Mvc;
 using Adiscount.Services;
-
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class APIController: Controller
+public class APIController : Controller
 {
-    private ClientService clientDB = new ClientService();
+    private readonly ClientService clientDB = new();
+    private readonly PictureService pictureDB = new();
+    [EnableCors] 
+    [HttpGet("client/{id}")]
+    public ActionResult<Client> Getclient(int id)
+    {
+        var c = clientDB.Get(id);
+        if (c == null)
+            return NotFound("No Client Found");
+        return c;
+    }
 
-    [HttpGet("{id}")]
-    public ActionResult<Client> Get(int id)
+    [HttpGet("client")]
+    public ActionResult<List<Client>> Getclient()
     {
-        Client c=clientDB.Get(id);
+        var c = clientDB.Get();
         if (c == null)
-        {
             return NotFound("No Client Found");
-        }
-        else
-            return c;
+        return c;
     }
-    
-    [HttpGet]
-    public ActionResult<List<Client>> Get()
+
+    [HttpGet("picture")]
+    public ActionResult<List<Picture>> Getpicture()
     {
-        List<Client> c=clientDB.Get();
-        if (c == null)
-        {
-            return NotFound("No Client Found");
-        }
-        else
-            return c;
+        var p = pictureDB.Get();
+        if (p.Count == 0)
+            return NotFound();
+        return p;
     }
- 
 }

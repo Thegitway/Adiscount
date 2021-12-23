@@ -1,17 +1,16 @@
-using Microsoft.EntityFrameworkCore;
 using Adiscount.Entities;
-namespace Adiscount.db.mariaDb { 
-public partial class MariaDbContext : DbContext
+using Microsoft.EntityFrameworkCore;
+
+namespace Adiscount.db.mariaDb;
+
+public class MariaDbContext : DbContext
 {
-   
+    public virtual DbSet<Client> Clients { get; set; }
+    public virtual DbSet<Picture> Pictures { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql("server=localhost;database=omar;user=root;password=OUKIL",
-            ServerVersion.AutoDetect("server=localhost;database=omar;user=root;password=OUKIL"));    
+        optionsBuilder.UseLazyLoadingProxies().UseMySql("server=localhost;database=omar;user=root;password=OUKIL",
+            ServerVersion.AutoDetect("server=localhost;database=omar;user=root;password=OUKIL"));
     }
-    
-
-    public virtual DbSet<Client> Clients { get; set; }
-    public virtual DbSet<Picture> Pictures{get;set;}
-}
 }

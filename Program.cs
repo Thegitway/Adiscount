@@ -4,22 +4,19 @@ using Adiscount.Entities;
 Console.WriteLine("begin !");
 var dd = new MariaDbContext();
 
-if (!dd.Database.CanConnect())
+if (!dd.Database.CanConnect() || dd.Clients.ToList().Count == 0 || dd.Pictures.ToList().Count == 0)
 {
     dd.Database.EnsureDeleted();
-    Console.WriteLine("Creating database if not created");
+    Console.WriteLine("Creating database");
     dd.Database.EnsureCreated();
     dd.Clients.Add(new Client
         {firstName = "OMAR", lastName = "OUKIL", birth = DateTime.Now, email = "omaroukil31@gmail.com"});
     dd.Clients.Add(new Client
         {firstName = "GUTS", lastName = "BERSERK", birth = DateTime.Now, email = "behelit@gmail.com"});
     //Add Data to pictures table
-    byte[] b=File.ReadAllBytes("Assets/pic.jpeg");
-
-    string data = "";
-   
-    dd.Pictures.Add(new Picture {data = b, size = data.Length, mimeType = "jpeg"});
-
+    var b = File.ReadAllBytes("Assets/pic.jpeg");
+    var data = "";
+    dd.Pictures.Add(new Picture {data = b, size = b.Length, mimeType = "jpeg"});
     dd.SaveChanges();
 }
 
