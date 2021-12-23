@@ -1,17 +1,23 @@
-// using Adiscount.db.mariaDb;
-// using Adiscount.Entities;
-//
-// Console.WriteLine("begin");
-//
-// var dd = new MariaDbContext();
-// dd.Database.EnsureDeleted();
-// dd.Database.EnsureCreated();
-// dd.Clients.Add(new Client
-//     {firstName = "OMAR", lastName = "OUKIL", birth = DateTime.Now, email = "omaroukil31@gmail.com"});
-// dd.Clients.Add(new Client
-//     {firstName = "GUTS", lastName = "BERSERK", birth = DateTime.Now, email = "behelit@gmail.com"});
-// dd.SaveChanges();
-// Console.WriteLine("fin");
+using Adiscount.db.mariaDb;
+using Adiscount.Entities;
+
+Console.WriteLine("begin !");
+var dd = new MariaDbContext();
+
+if (!dd.Database.CanConnect())
+{
+    dd.Database.EnsureDeleted();
+    Console.WriteLine("Creating database if not created");
+    dd.Database.EnsureCreated();
+    dd.Clients.Add(new Client
+        {firstName = "OMAR", lastName = "OUKIL", birth = DateTime.Now, email = "omaroukil31@gmail.com"});
+    dd.Clients.Add(new Client
+        {firstName = "GUTS", lastName = "BERSERK", birth = DateTime.Now, email = "behelit@gmail.com"});
+    dd.SaveChanges();
+}
+
+
+Console.WriteLine("END !");
 
 var builder = WebApplication.CreateBuilder(args);
 
