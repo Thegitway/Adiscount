@@ -13,6 +13,13 @@ if (!dd.Database.CanConnect())
         {firstName = "OMAR", lastName = "OUKIL", birth = DateTime.Now, email = "omaroukil31@gmail.com"});
     dd.Clients.Add(new Client
         {firstName = "GUTS", lastName = "BERSERK", birth = DateTime.Now, email = "behelit@gmail.com"});
+    //Add Data to pictures table
+    byte[] b=File.ReadAllBytes("Assets/pic.jpeg");
+
+    string data = "";
+   
+    dd.Pictures.Add(new Picture {data = b, size = data.Length, mimeType = "jpeg"});
+
     dd.SaveChanges();
 }
 
