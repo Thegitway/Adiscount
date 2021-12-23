@@ -1,10 +1,13 @@
 
+namespace Adiscount.Entities{
 abstract public class User{
-  public String firstName {get; set;}
-  public String? lastName {get; set;}
-  public String id {get; set;}
-  public String email {get; set;}
+  public string firstName {get; set;}
+  public string? lastName {get; set;}
+  public int id {get; set;}
+  public string email {get; set;}
+   
   public DateTime birth {get; set;}
-  //public Picture? pic{get;set;}
+  public virtual Picture? pic{get;set;}
   
+}
 }

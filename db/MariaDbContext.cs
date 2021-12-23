@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Entities.Client;
-namespace db.mariaDb { 
+using Adiscount.Entities;
+namespace Adiscount.db.mariaDb { 
 public partial class MariaDbContext : DbContext
 {
    
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseMySql("server=localhost;database=omar;user=root;password=OUKIL",
@@ -12,6 +11,7 @@ public partial class MariaDbContext : DbContext
     }
     
 
-    public virtual DbSet<Client> clients { get; set; }
+    public virtual DbSet<Client> Clients { get; set; }
+    public virtual DbSet<Picture> Pictures{get;set;}
 }
 }
