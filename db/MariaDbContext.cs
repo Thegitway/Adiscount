@@ -10,7 +10,10 @@ public class MariaDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseLazyLoadingProxies().UseMySql("server=localhost;database=omar;user=root;password=OUKIL",
-            ServerVersion.AutoDetect("server=localhost;database=omar;user=root;password=OUKIL"));
+
+        string connectionString1 = "jdbc:mariadb://mariadb:3306/omar?user=root&password=OUKIL";
+        string connectionString2 = "server=localhost;port=3306;database=omar;user=root;password=OUKIL";
+        optionsBuilder.UseLazyLoadingProxies().UseMySql(connectionString2,
+            ServerVersion.AutoDetect(connectionString2));
     }
 }
