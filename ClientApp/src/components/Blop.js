@@ -5,27 +5,29 @@ export class Blop extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {picData: [], loading: true};
+        this.state = {pic:null, loading: true,error:null};
     }
-
+    async getPic()
+    {
+        let rep=await fetch("https://localhost:7128/api/picture/1");
+        let json= await rep.json()
+        //console.log(json)
+        return json
+    }
+    
     componentDidMount() {
-        const url = "https://localhost:7128/api/client/1";
-
-        this.setState({
-            picData:
-        });
-
-
+        this.getPic().then((x)=>{this.setState({pic:x.data})})
     }
-
+    
     render() {
-        return (
-           this.state.picData
-            // <img
-            //     id="omar"
-            //     src=v
-            //     alt="omar"></img>
-        );
+     
+        if(this.state.pic==null)
+        {
+           return "LOADING..."
+                }else{
+            var dt = `data:image/png;base64, ${this.state.pic}`;
+            return(<img id="ItemPreview" src ={dt} />);
+        }
     }
 }
 

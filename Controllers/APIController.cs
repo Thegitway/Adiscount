@@ -10,7 +10,6 @@ public class APIController : Controller
     private readonly ClientService clientDB = new();
     private readonly PictureService pictureDB = new();
     
-    [EnableCors] 
 
     [HttpGet("client/{id}")]
     public ActionResult<Client> Getclient(int id)
@@ -21,7 +20,7 @@ public class APIController : Controller
         return c;
     }
     
-    [EnableCors] 
+    
 
     [HttpGet("client")]
     public ActionResult<List<Client>> Getclient()
@@ -32,7 +31,7 @@ public class APIController : Controller
         return c;
     }
     
-    [EnableCors]
+ 
     [HttpGet("picture/{id}")]
     public ActionResult<Picture> Getpicture(int id)
     {
@@ -40,7 +39,6 @@ public class APIController : Controller
         
     }
     
-    [EnableCors] 
     [HttpGet("picture")]
     public ActionResult<List<Picture>> Getpicture()
     {
