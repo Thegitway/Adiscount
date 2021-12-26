@@ -3,7 +3,7 @@ using Adiscount.Entities;
 
 Console.WriteLine("begin !");
 var dd = new MariaDbContext();
-
+dd.Database.EnsureDeleted();
 if (!dd.Database.CanConnect() || dd.Clients.ToList().Count == 0 || dd.Pictures.ToList().Count == 0)
 {
     dd.Database.EnsureDeleted();
@@ -14,9 +14,9 @@ if (!dd.Database.CanConnect() || dd.Clients.ToList().Count == 0 || dd.Pictures.T
     dd.Clients.Add(new Client
         {firstName = "GUTS", lastName = "BERSERK", birth = DateTime.Now, email = "behelit@gmail.com"});
     //Add Data to pictures table
-    var b = File.ReadAllBytes("Assets/pic.jpeg");
+    var b = File.ReadAllBytes("Assets/docker-img.png");
     var data = "";
-    dd.Pictures.Add(new Picture {data = b, size = b.Length, mimeType = "jpeg"});
+    dd.Pictures.Add(new Picture {data = b, size = b.Length, mimeType = "png"});
     dd.SaveChanges();
 }
 
