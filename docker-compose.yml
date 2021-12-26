@@ -1,0 +1,24 @@
+﻿version: '3.4'
+services:
+  mariadbBlop:
+    image: mariadb:latest
+    environment:
+      MARIADB_USER: "boring"
+      MARIADB_PASSWORD: "OUKIL"
+      MARIADB_ROOT_PASSWORD: "OUKIL"
+    ports:
+      - "3306:3306"
+  adiscount:
+    build: .
+    ports:
+      - "5000:5000" 
+    depends_on:
+      - mariadbBlop
+      
+
+        
+      
+      
+      
+      
+    

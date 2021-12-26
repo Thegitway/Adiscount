@@ -3,7 +3,7 @@ using Adiscount.Entities;
 
 Console.WriteLine("begin !");
 var dd = new MariaDbContext();
-dd.Database.EnsureDeleted();
+
 if (!dd.Database.CanConnect() || dd.Clients.ToList().Count == 0 || dd.Pictures.ToList().Count == 0)
 {
     dd.Database.EnsureDeleted();

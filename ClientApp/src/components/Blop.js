@@ -9,7 +9,7 @@ export class Blop extends Component {
     }
     async getPic()
     {
-        let rep=await fetch("https://localhost:7128/api/picture/1");
+        let rep=await fetch("https://localhost:5001/api/picture/1");
         let json= await rep.json()
         //console.log(json)
         return json
