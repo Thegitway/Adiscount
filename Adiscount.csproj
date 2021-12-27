@@ -34,6 +34,16 @@
     <Folder Include="Assets" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="omar\web.config" />
+    <_ContentIncludedByDefault Remove="omar\Adiscount.deps.json" />
+    <_ContentIncludedByDefault Remove="omar\Adiscount.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="omar\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="omar\appsettings.json" />
+    <_ContentIncludedByDefault Remove="omar\wwwroot\asset-manifest.json" />
+    <_ContentIncludedByDefault Remove="omar\wwwroot\manifest.json" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
