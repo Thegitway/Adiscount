@@ -8,7 +8,7 @@ This is the source code for the Adiscount app. It contains both client and back 
 - [mariadb](https://mariadb.org/)
 ## to deploy
 - [docker](https://www.docker.com/products/docker-desktop)
-- [WSL limux kerner] (https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+- [WSL limux kerner](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 
 ## Setup
 - Clone the project
