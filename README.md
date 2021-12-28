@@ -37,7 +37,7 @@ you will get all client in the DB
 Deployments are handled by [Docker] i user docker-compose to generate both container for mariadb and (api+react)
 
 - Exec this command:
-- to generate the the deploy folder named `out`
+- to generate a deployment folder named `out`
 - ```shell script
 $> dotnet publish -o out
 ```
