@@ -5,7 +5,7 @@ This is the source code for the Adiscount app. It contains both client and back 
 ## Requirements
 - [dotnet v6](https://dotnet.microsoft.com/en-us/)
 - [node.js](https://nodejs.org/en/download/)
-- [mariadb] (https://mariadb.org/)
+- [mariadb](https://mariadb.org/)
 ## to deploy
 - [docker](https://www.docker.com/products/docker-desktop)
 - [WSL limux kerner] (https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
@@ -38,11 +38,11 @@ Deployments are handled by [Docker] i user docker-compose to generate both conta
 
 - Exec this command:
 - to generate a deployment folder named `out`
-- ```shell script
+```shell script
 $> dotnet publish -o out
 ```
-- after that create an image and container from the docker-compose.yaml file
-  - `Docker Desktop must be launched`
-  ```shell script
+- now you should create an image and also containers from the docker-compose.yaml file
+ `Docker Desktop must be launched`
+```shell script
 $> docker-compose up
 ```
