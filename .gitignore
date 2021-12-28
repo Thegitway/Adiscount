@@ -11,6 +11,7 @@
 *.userprefs
 pub/
 omar/
+out/
 
 # Build results
 [Dd]ebug/
