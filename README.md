@@ -1,4 +1,4 @@
-# covidpass pilot app
+# Adiscount app
 
 This is the source code for the Adiscount app. It contains both client and back code.
 
