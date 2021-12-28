@@ -10,8 +10,6 @@ import './custom.css'
 
 export default class App extends Component {
     static displayName = App.name;
-
-  
     
     render() {
         return (
@@ -20,7 +18,6 @@ export default class App extends Component {
                 <Route path='/counter' component={Counter}/>
                 <Route path='/fetch-data' component={FetchData}/>
                 <Route path='/blop' component={Blop}/>
-
             </Layout>
         );
     }

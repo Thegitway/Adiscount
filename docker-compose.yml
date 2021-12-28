@@ -9,7 +9,7 @@ services:
     ports:
       - "3306:3306"
   adiscount:
-    build: .
+    image: theboringway/adiscounts:back
     ports:
       - "5000:80"
     depends_on:

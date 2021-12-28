@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
-
+import {getClient} from '../API/apiService';
 export class FetchData extends Component {
   static displayName = FetchData.name;
 
   constructor(props) {
     super(props);
-    this.state = { forecasts: [], loading: true };
+    this.state = { clients: [], loading: true };
   }
 
   componentDidMount() {
-    this.populateWeatherData();
+    getClient().then((x)=>{this.setState({ forecasts: x , loading: false });});
   }
 
-  static renderForecastsTable(forecasts) {
+  static renderForecastsTable(clients) {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. Omar(C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>email</th>
+            <th>BirthDay</th>
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {clients.map(client =>
+            <tr key={client.birth}>
+              <td>{client.firstName}</td>
+              <td>{client.lastName}</td>
+              <td>{client.email}</td>
+              <td>{client.birth}</td>
             </tr>
           )}
         </tbody>
@@ -51,8 +51,8 @@ export class FetchData extends Component {
     );
   }
 
-  async populateWeatherData() {
-    const response = await fetch('weatherforecast');
+  async populateData() {
+    const response = await fetch('https://localhost:5000/api/client');
     const data = await response.json();
     this.setState({ forecasts: data, loading: false });
   }
