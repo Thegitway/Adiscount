@@ -16,7 +16,7 @@ public class PictureService : IPicture
     {
         try
         {
-            mdb.Pictures.Add(picture);
+            _mdb.Pictures.Add(picture);
             return true;
         }
         catch (Exception e)
@@ -29,7 +29,7 @@ public class PictureService : IPicture
     {
         try
         {
-            mdb.Pictures.Update(picture);
+            _mdb.Pictures.Update(picture);
             return true;
         }
         catch (Exception e)
@@ -50,7 +50,7 @@ public class PictureService : IPicture
             //return query.FirstOrDefault<Client>();
 
             //Second method
-            return mdb.Pictures.Where(c => c.id == id).FirstOrDefault();
+            return _mdb.Pictures.Where(c => c.id == id).FirstOrDefault();
         }
         catch (Exception e)
         {
@@ -60,14 +60,14 @@ public class PictureService : IPicture
 
     public List<Picture> Get()
     {
-        return mdb.Pictures.ToList();
+        return _mdb.Pictures.ToList();
     }
 
     public bool Remove(int id)
     {
         try
         {
-            mdb.Pictures.Remove(mdb.Pictures.Where(c => c.id == id).First());
+            _mdb.Pictures.Remove(_mdb.Pictures.Where(c => c.id == id).First());
             return true;
         }
         catch (Exception e)
