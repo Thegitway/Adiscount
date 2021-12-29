@@ -6,8 +6,12 @@ namespace Adiscount.Services;
 
 public class PictureService : IPicture
 {
-    private readonly MariaDbContext mdb = new();
+    private readonly MariaDbContext _mdb ;
 
+    public PictureService(MariaDbContext mdb)
+    {
+        this._mdb = mdb;
+    }
     public bool Add(Picture picture)
     {
         try

@@ -1,36 +1,31 @@
 using Adiscount.db.mariaDb;
 using Adiscount.Entities;
+using Adiscount.repositories;
+using Adiscount.Services;
+using Microsoft.EntityFrameworkCore;
+string connectionString = "server=localhost;port=3306;database=omar;user=root;password=OUKIL";
 
-Console.WriteLine("begin !");
-var dd = new MariaDbContext();
-
-if (!dd.Database.CanConnect() || dd.Clients.ToList().Count == 0 || dd.Pictures.ToList().Count == 0)
-{
-    dd.Database.EnsureDeleted();
-    Console.WriteLine("Creating database");
-    dd.Database.EnsureCreated();
-    dd.Clients.Add(new Client
-        {firstName = "OMAR", lastName = "OUKIL", birth = DateTime.Now, email = "omaroukil31@gmail.com"});
-    dd.Clients.Add(new Client
-        {firstName = "GUTS", lastName = "BERSERK", birth = DateTime.Now, email = "behelit@gmail.com"});
-    //Add Data to pictures table
-    var b = File.ReadAllBytes("Assets/docker-img.png");
-    var data = "";
-    dd.Pictures.Add(new Picture {data = b, size = b.Length, mimeType = "png"});
-    dd.SaveChanges();
-}
-
-
-Console.WriteLine("END !");
 
 var builder = WebApplication.CreateBuilder(args);
+//dependency injection
+builder.Services.AddDbContext<MariaDbContext>(opt =>
+    opt.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
 
-// Add services to the container.
+builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<PictureService>();
+
+
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.

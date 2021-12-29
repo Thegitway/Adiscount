@@ -7,14 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]
 public class APIController : Controller
 {
-    private readonly ClientService clientDB = new();
-    private readonly PictureService pictureDB = new();
+    private readonly ClientService _clientDB;
+    private readonly PictureService _pictureDB;
     
+   public APIController(ClientService clientDb,PictureService pictureDb)
+    {
+        _clientDB = clientDb;
+        _pictureDB = pictureDb;
+    }
 
     [HttpGet("client/{id}")]
     public ActionResult<Client> Getclient(int id)
     {
-        var c = clientDB.Get(id);
+        var c = _clientDB.Get(id);
         if (c == null)
             return NotFound("No Client Found");
         return c;
@@ -25,7 +30,7 @@ public class APIController : Controller
     [HttpGet("client")]
     public ActionResult<List<Client>> Getclient()
     {
-        var c = clientDB.Get();
+        var c = _clientDB.Get();
         if (c == null)
             return NotFound("No Client Found");
         return c;
@@ -35,14 +40,14 @@ public class APIController : Controller
     [HttpGet("picture/{id}")]
     public ActionResult<Picture> Getpicture(int id)
     {
-        return pictureDB.Get(id);
+        return _pictureDB.Get(id);
         
     }
     
     [HttpGet("picture")]
     public ActionResult<List<Picture>> Getpicture()
     {
-        var p = pictureDB.Get();
+        var p = _pictureDB.Get();
         if (p.Count == 0)
             return NotFound();
         return p;

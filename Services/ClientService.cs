@@ -8,12 +8,17 @@ namespace Adiscount.Services;
 
 public  class ClientService : IClient
 {
-    private  MariaDbContext mdb = new MariaDbContext();
+    private  readonly MariaDbContext _mdb;
+
+    public ClientService(MariaDbContext mdb)
+    {
+        this._mdb = mdb;
+    }
   public  bool Add(Client client)
     {
         try
         {
-            mdb.Clients.Add(client);
+            _mdb.Clients.Add(client);
             return true;
         }
         catch (Exception e)
@@ -27,7 +32,7 @@ public  class ClientService : IClient
     {
         try
         {
-            mdb.Clients.Update(client);
+            _mdb.Clients.Update(client);
             return true;
         }
         catch (Exception e)
@@ -47,7 +52,7 @@ public  class ClientService : IClient
             //return query.FirstOrDefault<Client>();
             
             //Second method
-            return mdb.Clients.Where(c => c.id == id).FirstOrDefault();
+            return _mdb.Clients.Where(c => c.id == id).FirstOrDefault();
 
         }
         catch (Exception e)
@@ -58,14 +63,14 @@ public  class ClientService : IClient
 
     public List<Client> Get()
     {
-        return mdb.Clients.ToList();
+        return _mdb.Clients.ToList();
     }
 
     public bool Remove(int id)
     {
         try
         {
-            mdb.Clients.Remove(mdb.Clients.Where(c => c.id == id).First());
+            _mdb.Clients.Remove(_mdb.Clients.Where(c => c.id == id).First());
             return true;
         }
         catch (Exception e)
