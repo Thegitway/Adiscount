@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 //dependency injection
-var connectionString = builder.Configuration.GetConnectionString("mariaDB");
+var connectionString = builder.Configuration.GetConnectionString("dockerDB");
 
 builder.Services.AddDbContext<MariaDbContext>(opt =>
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
