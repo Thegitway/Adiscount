@@ -1,22 +1,36 @@
 ﻿using Adiscount.db.mariaDb;
 using Adiscount.Entities;
-using Adiscount.repositories;
 
 namespace Adiscount.Services;
 
-public class PictureService : IPicture
+public class ProductService
 {
-    private readonly MariaDbContext _mdb ;
+    private  readonly MariaDbContext _mdb;
 
-    public PictureService(MariaDbContext mdb)
+    public ProductService(MariaDbContext mdb)
     {
         this._mdb = mdb;
     }
-    public bool Add(Picture picture)
+    public  bool Add(Product product)
     {
         try
         {
-            _mdb.Pictures.Add(picture);   
+            _mdb.Products.Add(product);
+            _mdb.SaveChanges();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+
+    }
+
+    public bool Update(Product product)
+    {
+        try
+        {
+            _mdb.Products.Update(product);
             _mdb.SaveChanges();
 
             return true;
@@ -27,23 +41,7 @@ public class PictureService : IPicture
         }
     }
 
-    public bool Update(Picture picture)
-    {
-        try
-        {
-            _mdb.Pictures.Update(picture);
-            _mdb.SaveChanges();
-
-            return true;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
-
-
-    public Picture Get(int id)
+    public Product Get(int id)
     {
         try
         {
@@ -52,9 +50,10 @@ public class PictureService : IPicture
             //     where st.id == id
             //     select st;
             //return query.FirstOrDefault<Client>();
-
+            
             //Second method
-            return _mdb.Pictures.Where(c => c.id == id).FirstOrDefault();
+            return _mdb.Products.Where(p => p.id == id).FirstOrDefault();
+
         }
         catch (Exception e)
         {
@@ -62,18 +61,16 @@ public class PictureService : IPicture
         }
     }
 
-    public List<Picture> Get()
+    public List<Product> Get()
     {
-        return _mdb.Pictures.ToList();
+        return _mdb.Products.ToList();
     }
 
     public bool Remove(int id)
     {
         try
         {
-            _mdb.Pictures.Remove(_mdb.Pictures.Where(c => c.id == id).First());
-            _mdb.SaveChanges();
-
+            _mdb.Products.Remove(_mdb.Products.Where(c => c.id == id).First());
             return true;
         }
         catch (Exception e)

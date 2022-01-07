@@ -19,6 +19,8 @@ public  class ClientService : IClient
         try
         {
             _mdb.Clients.Add(client);
+            _mdb.SaveChanges();
+
             return true;
         }
         catch (Exception e)
@@ -33,6 +35,8 @@ public  class ClientService : IClient
         try
         {
             _mdb.Clients.Update(client);
+            _mdb.SaveChanges();
+
             return true;
         }
         catch (Exception e)
@@ -71,6 +75,8 @@ public  class ClientService : IClient
         try
         {
             _mdb.Clients.Remove(_mdb.Clients.Where(c => c.id == id).First());
+            _mdb.SaveChanges();
+
             return true;
         }
         catch (Exception e)

@@ -11,5 +11,6 @@ public class MariaDbContext : DbContext
     }
     public virtual DbSet<Client> Clients { get; set; }
     public virtual DbSet<Picture> Pictures { get; set; }
+    public virtual DbSet<Product> Products { get; set; }
     
 }

@@ -1,5 +1,5 @@
 ﻿import React, {Component} from 'react';
-
+import {getPic} from '../API/apiService.js'
 export class Blop extends Component {
     static displayName = Blop.name;
 
@@ -7,15 +7,10 @@ export class Blop extends Component {
         super(props);
         this.state = {pic:null, loading: true,error:null};
     }
-    async getPic()
-    {
-        let rep=await fetch("https://localhost:5000/api/picture/1");
-        let json= await rep.json()
-        return json
-    }
+    
     
     componentDidMount() {
-        this.getPic().then((x)=>{this.setState({pic:x.data})})
+        getPic().then((x)=>{this.setState({pic:x[0].data})})
     }
     
     render() {

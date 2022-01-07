@@ -11,7 +11,7 @@ builder.Services.AddDbContext<MariaDbContext>(opt =>
 
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<PictureService>();
-
+builder.Services.AddScoped<ProductService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -33,6 +33,8 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(policy =>
     policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
 );
 
 app.MapControllerRoute(
